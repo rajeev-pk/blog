@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        <title>{% block title %}Home{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('build/main.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+	<nav class="navbar navbar-expand-lg navbar-light border-bottom">
+      <div class="container">
+        <a class="navbar-brand" href="{{ path('home') }}">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Home</a>
+            </li>
+              {% if(is_granted("ROLE_ADMIN")) %}
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{{ path('publicatie_index') }}">Admin</a>
+                  </li>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block header %} {% endblock %}
+    <main class="container mt-4">
+      {% block body %}{% endblock %}
+    </main>
+    {%  block footer %}{% endblock %}
+	<script src="{{ asset('build/app.js') }}"></script>
     </body>
 </html>

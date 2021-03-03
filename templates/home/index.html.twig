@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block header %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-4">Welkom man broooo!</h1>
+			<p class="lead">Dit is mijn blog.</p>
+			<hr class="my-4">
+			<p>Opdracht voor school</p>
+			<p class="lead">
+				<a class="btn btn-primary " href="#" role="button">Ja toch</a>
+			</p>
+		</div>
+
+	</div>
+{% endblock %}
+{% block body %}
+	{% for post in posts %}
+		<div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center align-items-center">
+			<div class="card mb-2">
+				<div class="card-body">
+					<h6>{{ post.title }}</h6>
+					<p class="card-text">
+						{{ post.text[0:30] }}
+					</p>
+					<div class="d-flex align-items-center justify-content-start">
+						<p class="card-text mt-2 mr-2">Blog number:</p>
+						<a class="btn btn-danger">{{ post.id }}</a>
+					</div>
+					<a class="btn btn-primary" href="{{ path('publicatie_show', {id: post.id}) }}">View publicatie</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}
+
+	{% block footer %}
+
+		<footer class="pt-4 my-md-5 pt-md-5 border-top container">
+			<div class="row">
+				<div class="col-12 col-md">
+					<small class="d-block mb-3 text-muted">© 2021</small>
+				</div>
+				<div class="col-6 col-md">
+					<h5>Features</h5>
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Cool stuff</a></li>
+						<li><a class="text-muted" href="#">Random feature</a></li>
+						<li><a class="text-muted" href="#">Team feature</a></li>
+						<li><a class="text-muted" href="#">Stuff for developers</a></li>
+						<li><a class="text-muted" href="#">Another one</a></li>
+						<li><a class="text-muted" href="#">Last time</a></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5>Resources</h5>
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Resource</a></li>
+						<li><a class="text-muted" href="#">Resource name</a></li>
+						<li><a class="text-muted" href="#">Another resource</a></li>
+						<li><a class="text-muted" href="#">Final resource</a></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5>Publicaties</h5>
+					<ul class="list-unstyled text-small">
+						{% for post in posts %}
+							<li><a class="text-muted" href="{{ path('publicatie_show', {id: post.id}) }}">{{ post.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</footer>
+
+	{% endblock %}

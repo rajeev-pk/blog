@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publicatie{% endblock %}
+
+{% block body %}
+    <h1>Publicatie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ publicatie.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ publicatie.title }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ publicatie.text }}</td>
+            </tr>
+            <tr>
+                <th>Viewable</th>
+                <td>{{ publicatie.viewable ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Moment</th>
+                <td>{{ publicatie.moment ? publicatie.moment|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('publicatie_index') }}">back to list</a>
+
+    <a href="{{ path('publicatie_edit', {'id': publicatie.id}) }}">edit</a>
+
+    {{ include('publicatie/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Publicatie{% endblock %}
+
+{% block body %}
+    <h1>Edit Publicatie</h1>
+
+    {{ include('publicatie/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('publicatie_index') }}">back to list</a>
+
+    {{ include('publicatie/_delete_form.html.twig') }}
+{% endblock %}

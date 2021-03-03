@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publicatie index{% endblock %}
+
+{% block body %}
+    <h1>Publicatie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Text</th>
+                <th>Viewable</th>
+                {% if(is_granted("ROLE_ADMIN")) %}
+                <th>Moment</th>
+                <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for publicatie in publicaties %}
+            <tr>
+                <td>{{ publicatie.id }}</td>
+                <td>{{ publicatie.title }}</td>
+                <td>{{ publicatie.text }}</td>
+                <td>{{ publicatie.viewable ? 'Yes' : 'No' }}</td>
+                {% if(is_granted("ROLE_ADMIN")) %}
+                <td>{{ publicatie.moment ? publicatie.moment|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('publicatie_show', {'id': publicatie.id}) }}">show</a>
+                    <a href="{{ path('publicatie_edit', {'id': publicatie.id}) }}">edit</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if(is_granted("ROLE_ADMIN")) %}
+        <a href="{{ path('publicatie_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}
